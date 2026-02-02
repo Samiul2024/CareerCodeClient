@@ -31,8 +31,8 @@ const HotJobs = ({ jobsPromise }) => {
 
     return (
         <div>
-            <h2 className="text-4xl">Hot Jobs Of The Day</h2>
-            <div className="grid gap-4 grid-cols-1 md:grid-cols-2 lg:grid-cols-3">
+            <h2 className="text-4xl py-4 bg-amber-500 rounded-full text-center">Hot Jobs Of The Day</h2>
+            <div className="grid gap-4 py-4  grid-cols-1 md:grid-cols-2 lg:grid-cols-3">
 
 
                 {
