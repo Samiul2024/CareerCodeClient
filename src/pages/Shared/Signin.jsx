@@ -3,30 +3,36 @@ import { AuthContext } from './AuthContext';
 import Lottie from 'lottie-react';
 import signInLottie from '../../assets/lotties/Login.json'
 import SocialLogin from './SocialLogin';
+import { useLocation, useNavigate } from 'react-router';
 
 const Signin = () => {
 
-      const { signInUser } = use(AuthContext);
-    
-        const handleSignIn = e => {
-            e.preventDefault();
-            const form = e.target;
-            const email = form.email.value;
-            const password = form.password.value;
-            console.log(email, password);
-    
-            // sign in user
-            signInUser(email, password)
-                .then(result => {
-                    console.log(result.user);
-                })
-                .catch(error => {
-                    console.log(error);
-                })
-    
-    
-        }
-      
+    const { signInUser } = use(AuthContext);
+    const location = useLocation();
+    console.log('location in signin page', location);
+    const navigate = useNavigate();
+    const from = location.state || '/';
+
+    const handleSignIn = e => {
+        e.preventDefault();
+        const form = e.target;
+        const email = form.email.value;
+        const password = form.password.value;
+        console.log(email, password);
+
+        // sign in user
+        signInUser(email, password)
+            .then(result => {
+                console.log(result.user);
+                navigate(from);
+            })
+            .catch(error => {
+                console.log(error);
+            })
+
+
+    }
+
     return (
         <div className="hero bg-base-200 min-h-screen">
             <div className="hero-content flex-col lg:flex-row-reverse">
@@ -47,7 +53,7 @@ const Signin = () => {
                                 <button className="btn btn-neutral mt-4">Sign In</button>
                             </fieldset>
                         </form>
-                        <SocialLogin></SocialLogin>
+                        <SocialLogin from={from}></SocialLogin>
                     </div>
                 </div>
             </div>
