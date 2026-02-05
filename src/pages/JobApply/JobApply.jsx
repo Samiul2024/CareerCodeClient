@@ -1,5 +1,5 @@
 import React from 'react';
-import { useParams } from 'react-router';
+import { Link, useParams } from 'react-router';
 import useAuth from '../../hooks/useAuth';
 
 const JobApply = () => {
@@ -22,7 +22,8 @@ const JobApply = () => {
 
     return (
         <div>
-            <h3 className="text-4xl">Apply Job For</h3>
+            <h3 className="text-4xl">Apply For This Job: <Link to={`/jobs/${jobId}`}> Details
+            </Link> </h3>
             <form onSubmit={handleApplyFormSubmit}>
                 <fieldset className='fieldset bg-base-200 border-base-300 rounded-box w-xs'>
                     <label className='label'>
