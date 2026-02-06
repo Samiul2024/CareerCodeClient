@@ -1,6 +1,7 @@
 import React from 'react';
 import { Link, useParams } from 'react-router';
 import useAuth from '../../hooks/useAuth';
+import axios from 'axios';
 
 const JobApply = () => {
     const { id: jobId } = useParams();
@@ -16,6 +17,23 @@ const JobApply = () => {
         const resume = form.resume.value;
 
         console.log(linkedIn, github, resume);
+
+
+        const application = {
+            jobId,
+            applicant: user.email,
+            linkedIn,
+            github,
+            resume
+        }
+
+        axios.post('http://localhost:3000/applications', application)
+            .then(res => {
+                console.log(res.data);
+            })
+            .catch(error => {
+                console.log(error);
+            })
 
     }
 
