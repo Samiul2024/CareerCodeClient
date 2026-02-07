@@ -4,7 +4,7 @@ import { AuthContext } from './AuthContext';
 
 const Navbar = () => {
 
-    const { user,signOutUser } = use(AuthContext);
+    const { user, signOutUser } = use(AuthContext);
 
     const handleSignOut = () => {
         signOutUser()
@@ -19,6 +19,13 @@ const Navbar = () => {
     const links = <>
         <li><NavLink to="/">Home</NavLink></li>
         {/* <li><NavLink to="/">Home</NavLink></li> */}
+
+        {
+            user && <>
+                <li><NavLink to="/myApplications">My Applications</NavLink></li>
+
+            </>
+        }
 
     </>
 
