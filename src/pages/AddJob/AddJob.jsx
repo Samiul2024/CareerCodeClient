@@ -1,7 +1,9 @@
 import React from 'react';
+import useAuth from '../../hooks/useAuth';
 
 const AddJob = () => {
 
+    const { user } = useAuth();
 
     const handleAddAJob = e => {
         e.preventDefault();
@@ -9,8 +11,26 @@ const AddJob = () => {
         const formData = new FormData(form);
         // console.log(formData.entries());
 
-        const data=Object.fromEntries(formData.entries());
-        console.log(data);
+        const data = Object.fromEntries(formData.entries());
+        // console.log(data); 
+        // process salary range data
+        const { min, max, currency, ...newJob } = data;
+        newJob.salaryRange = { min, max, currency }
+
+        // process requirements
+        const requirementsString = newJob.requirements;
+        const requirementsDirty = requirementsString.split(',');
+        const requirementsClean = requirementsDirty.map(req => req.trim());
+        newJob.requirements = requirementsClean;
+
+        // console.log(requirementsDirty, requirementsClean);
+        // newJob.requirements = newJob.requirements.split(',').map()
+
+        //process responsibilities
+        newJob.responsibilities = newJob.responsibilities.split(',').map(res => res.trim());
+
+        console.log(Object.keys(newJob).length);
+        console.log(newJob);
     }
 
 
@@ -22,7 +42,7 @@ const AddJob = () => {
                     <legend className="fieldset-legend">Basic Info</legend>
 
                     <label className="label">Job Title</label>
-                    <input type="email" className="input" placeholder="Job Title" />
+                    <input type="text" className="input" placeholder="Job Title" />
 
                     <label className="label">Company</label>
                     <input type="text"
@@ -41,9 +61,12 @@ const AddJob = () => {
                     <legend className="fieldset-legend">Job Type  </legend>
                     <div className="filter">
                         <input className="btn filter-reset" type="radio" name="jobType" aria-label="All" />
-                        <input className="btn" type="radio" name="jobType" aria-label="On-Site" />
-                        <input className="btn" type="radio" name="jobType" aria-label="Remote" />
-                        <input className="btn" type="radio" name="jobType" aria-label="Hybrid" />
+                        <input className="btn" type="radio" name="jobType"
+                            value="On-Site" aria-label="On-Site" />
+                        <input className="btn" type="radio" name="jobType"
+                            value="Remote" aria-label="Remote" />
+                        <input className="btn" type="radio" name="jobType"
+                            value="Hybrid" aria-label="Hybrid" />
                     </div>
 
                 </fieldset>
@@ -66,7 +89,7 @@ const AddJob = () => {
                 <fieldset className="fieldset bg-base-200 border-base-300 rounded-box w-xs border p-4">
                     <legend className="fieldset-legend">Application Deadline</legend>
 
-                    <input type="date" className="input" />
+                    <input type="date" name='deadline' className="input" />
 
                 </fieldset>
 
@@ -137,17 +160,17 @@ const AddJob = () => {
 
                     <label className="label">HR Email</label>
                     <input type="email"
-                        name='company'
+                        name='hr_email' defaultValue={user.email} readOnly
                         className="input" placeholder="HR Email" />
 
                     <input type="submit" value="Add Job" className='btn' />
                 </fieldset>
 
-                {/*  */}
+                {/*                 
                 <fieldset className="fieldset bg-base-200 border-base-300 rounded-box w-xs border p-4">
                     <legend className="fieldset-legend">Basic Info</legend>
 
-                </fieldset>
+                </fieldset> */}
 
             </form>
         </div>
