@@ -65,7 +65,7 @@ const AddJob = () => {
                     <legend className="fieldset-legend">Basic Info</legend>
 
                     <label className="label">Job Title</label>
-                    <input type="text" className="input" placeholder="Job Title" />
+                    <input type="text" name='title' className="input" placeholder="Job Title" />
 
                     <label className="label">Company</label>
                     <input type="text"
@@ -93,7 +93,7 @@ const AddJob = () => {
                     </div>
 
                 </fieldset>
-                {/* JOb Category */}
+                {/* Job Category */}
                 <fieldset className="fieldset bg-base-200 border-base-300 rounded-box w-xs border p-4">
                     <legend className="fieldset-legend">Job Category</legend>
 
