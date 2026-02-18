@@ -41,30 +41,37 @@ const AuthProvider = ({ children }) => {
             setLoading(false);
 
             if (currentUser?.email) {
-                const userData = { email: currentUser.email };
-                axios.post('http://localhost:3000/jwt', userData, {
-                    withCredentials: true
-                })
-                    .then(res => {
-                        console.log(res.data);
-                    })
+                axios.post('http://localhost:3000/jwt', { email: currentUser.email }, { withCredentials: true })
+                    .then(res => console.log(res.data))
                     .catch(error => console.log(error))
-
-                //  axios.post('http://localhost:3000/jwt', userData)
-                //                     .then(res => {
-                //                         console.log('token after jwt', res.data);
-
-                //                         0
-
-
-                //                         /*** We won't use it like this..
-                //                          */
-
-                //                         // const token = res.data.token;
-                //                         // localStorage.setItem('token', token);
-                //                     })
-                //                     .catch(error => console.log(error))
             }
+
+
+            // if (currentUser?.email) {
+            // const userData = { email: currentUser.email };
+            // axios.post('http://localhost:3000/jwt', userData, {
+            //     withCredentials: true
+            // })
+            //     .then(res => {
+            //         console.log(res.data);
+            //     })
+            //     .catch(error => console.log(error))
+
+            //  axios.post('http://localhost:3000/jwt', userData)
+            //                     .then(res => {
+            //                         console.log('token after jwt', res.data);
+
+            //                         0
+
+
+            //                         /*** We won't use it like this..
+            //                          */
+
+            //                         // const token = res.data.token;
+            //                         // localStorage.setItem('token', token);
+            //                     })
+            //                     .catch(error => console.log(error))
+            // }
             console.log('user in the auth state changed', currentUser);
         })
         return () => {
